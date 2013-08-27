@@ -42,6 +42,8 @@ i18n: {
     </div>
     <div style="display: inline-block;">
       <h2 style="display: inline-block;">JSON</h2>
+      <span>minify: </span>
+      <input id="minify" type="checkbox">
       <span>indent: </span>
       <input id="indent" type="number" value="2" min="0">
       <br>
@@ -51,9 +53,11 @@ i18n: {
     <script>
     var input = document.getElementById('input');
     var output = document.getElementById('output');
+    var minify = document.getElementById('minify');
     var indent = document.getElementById('indent');
-    input.oninput = indent.onchange = function () {
-      output.textContent = CSON.toJSON(input.value, indent.value);
+    input.oninput = minify.onchange = indent.onchange = function () {
+      output.textContent = CSON.toJSON(input.value,
+        !minify.checked && indent.value);
     };
     input.oninput();
     </script>
